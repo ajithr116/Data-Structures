@@ -42,15 +42,6 @@ class DoublyLinkedList {
         }
     }
 
-    // Method to print the linked list
-    printList() {
-        let current = this.head;
-        while (current) {
-            console.log(current.data);
-            current = current.next;
-        }
-    }
-
     // Method to delete a node with the specified value
     deleteNode(data) {
         let current = this.head;
@@ -108,6 +99,15 @@ class DoublyLinkedList {
         }
     }
 
+    // Print all elements by order
+    printList() {
+        let current = this.head;
+        while (current) {
+            console.log(current.data);
+            current = current.next;
+        }
+    }
+
     // Print all elements in reverse order
     printListReverse() {
         let current = this.tail;
@@ -116,53 +116,43 @@ class DoublyLinkedList {
             current = current.prev;
         }
     }
+
+    // Method to remove duplicates in a sorted singly linked list
+    removeDuplicates() {
+        let current = this.head;
+        while (current && current.next) {
+            if (current.data === current.next.data) {
+                current.next = current.next.next;
+                if (current.next) {
+                    current.next.prev = current;
+                } else {
+                    this.tail = current;
+                }
+            } else {
+                current = current.next;
+            }
+        }
+    }
 }
 
+const list = new DoublyLinkedList();
+
+list.append(1);
+list.append(2);
+list.append(3);
+list.append(3);
 
 
-let list = new DoublyLinkedList();
-
-// Add nodes at the end
-list.append(4);
-list.append(5);
-list.append(6);
-
-// Add node at the beginning
-list.prepend(1);
-list.prepend(2);
-list.prepend(3);
-list.prepend(7);
-list.prepend(7);
+list.prepend(4);
+list.prepend(5);
+list.prepend(6);
 
 
-// Print the linked list
-console.log("The linked list is:");
-// list.printList();
+list.deleteNode(4);
 
-// Delete a node with the specified value
-// list.deleteNode(20);
+list.insertAfter(6,20);
+list.insertBefore(6,555);
 
-// Print the linked list after deletion
-console.log("The linked list after deletion is:");
-// list.printList();
-
-// Insert a node after a node with x data
-list.insertAfter(6, 20); // Inserts 20 after 10
-list.insertBefore(3, 25); // Inserts 25 before 30
-
-// Print the linked list after insertion
-console.log("The linked list after insertion is:");
-// list.printList();
-
-// Remove duplicates in a sorted singly linked list
-// list.removeDuplicates();
-
-// Print the linked list after removing duplicates
-console.log("The linked list after removing duplicates is:");
-// list.printList();
-
-// Converts array to linked list
-// list.fromArray([1, 2, 3, 4, 5]); 
-
-// Prints: 5 4 3 2 1
-list.printListReverse(); 
+// list.printListReverse();
+list.removeDuplicates();
+list.printList();

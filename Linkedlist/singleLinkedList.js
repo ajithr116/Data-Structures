@@ -322,6 +322,16 @@ class SinglyLinkedList {
 */
 
 
+let list = new SinglyLinkedList();
+
+list.append(1);
+list.append(2);
+list.append(3);
+
+
+list.prepend(4);
+list.prepend(5);
+list.prepend(6);
 
 // Print the linked list
 console.log("The linked list is:");
