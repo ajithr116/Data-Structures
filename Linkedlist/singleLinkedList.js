@@ -470,3 +470,38 @@ class SinglyLinkedList {
         console.log(arr.join(' -> ')); // O(n)
     }
 }
+
+
+// Print the linked list
+console.log("The linked list is:");
+list.printList();
+
+// Delete a node with the specified value
+list.deleteNode(7);
+
+// Print the linked list after deletion
+console.log("The linked list after deletion is:");
+list.printList();
+
+// Insert a node after a node with x data
+list.insertAfter(6, 20); // Inserts 6 after 10
+list.insertBefore(6, 25); // Inserts 6 before 30
+
+// Print the linked list after insertion
+console.log("The linked list after insertion is:");
+list.printList();
+
+//Remove duplicates in a sorted singly linked list
+list.removeDuplicates();
+
+// Print the linked list after removing duplicates
+console.log("The linked list after removing duplicates is:");
+list.printList();
+
+// Converts array to linked list
+list.fromArray([111, 222, 333, 444, 555]); 
+list.printList();
+
+// Prints: 5 4 3 2 1
+list.printListReverse(); 
+
