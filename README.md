@@ -2,4 +2,3 @@
 
 <a href="https://docs.google.com/document/d/1FKPwM7F1fqW_Emv_W1xlTbSix9ZqLBqZgbv0oOhG9Ds/edit?usp=sharing">Detailed notes of Singly Linkedlist </a>
 
-<input type=button value="cleck">
