@@ -358,7 +358,7 @@ removeDuplicates Method: The space complexity is O(1) because it only requires m
 
 getLength Method: The space complexity is O(1) because it only requires memory for a single pointer (current) as it traverses the list.
 */
-
+   
 const list = new DoublyLinkedList();
 
 list.append(1);
