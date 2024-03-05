@@ -331,7 +331,34 @@ class DoublyLinkedList {
     Methods like append, prepend, insertAfter, insertBefore, deleteNode, printList, printListReverse, removeDuplicates, and getLength all have a time complexity of O(n) where n is the number of nodes in the linked list.
     The fromArray method has a time complexity of O(n^2) if the append method has a time complexity of O(n) because it calls the append method for each element in the array.
     */
-   
+
+
+/*
+Node Class: The space complexity for creating a single node is O(1) because it only requires memory for the data and two pointers (next and prev).
+
+DoublyLinkedList Class: The space complexity for creating an empty Doubly Linked List object is also O(1) because it only requires memory for two pointers (head and tail), which initially point to null.
+
+fromArray Method: This method iterates over the input array and calls the append method for each element. Since it creates a new node for each element, the space complexity is O(n), where n is the number of elements in the input array.
+
+append Method: This method creates a new node, so the space complexity is O(1) for each node added to the list.
+
+prepend Method: Similar to the append method, it creates a new node, so the space complexity is O(1) for each node added to the list.
+
+deleteNode Method: The method doesn't create any new nodes, so the space complexity is O(1).
+
+insertAfter Method: It creates a new node if necessary, but the space complexity is still O(1) for each node added.
+
+insertBefore Method: Similar to the insertAfter method, the space complexity is O(1) for each node added.
+
+printList Method: The space complexity is O(1) because it only requires memory for a single pointer (current) as it traverses the list.
+
+printListReverse Method: Similar to the printList method, the space complexity is O(1).
+
+removeDuplicates Method: The space complexity is O(1) because it only requires memory for a few pointers (current, prev, and values) as it traverses the list.
+
+getLength Method: The space complexity is O(1) because it only requires memory for a single pointer (current) as it traverses the list.
+*/
+
 const list = new DoublyLinkedList();
 
 list.append(1);
