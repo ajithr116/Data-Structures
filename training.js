@@ -1,33 +1,19 @@
-function mergeSort(array) {
-    const half = array.length / 2
-    
-    // Base case or terminating case
-    if(array.length < 2){
-      return array 
-    }
-    
-    const left = array.splice(0, half)      //The splice() method adds and/or removes array elements. The splice() method overwrites the original array.
-    return merge(mergeSort(left),mergeSort(array))
-}
-
-function merge(left, right) {
-    let arr = []
-    // Break out of loop if any one of the array becomes empty
-    while (left.length && right.length) {
-        // Pick the smaller among the smallest element of left and right sub arrays 
-        if (left[0] < right[0]) {
-            arr.push(left.shift())  
-        } else {
-            arr.push(right.shift()) 
+function bubbleSort(arr) {
+    let len = arr.length;
+    for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap arr[j] and arr[j + 1]
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
         }
     }
-    
-    // Concatenating the leftover elements
-    return [ ...arr, ...left, ...right ]
+    return arr;
 }
 
-
-array = [4, 8, 7, 2, -10,-66, 11, 1, 3, 1, 5];
-console.log(mergeSort(array));
-
-
+// Usage:
+let arr = [5, 3, 8, 4, 6, -1];
+arr = bubbleSort(arr);
+console.log(arr);  // Output: [3, 4, 5, 6, 8]
