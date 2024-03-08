@@ -10,7 +10,7 @@ function bubbleSort(arr) {
                 swapped = true;
             }
         }
-        if (!swapped) break;// If no two elements were swapped in a pass, array is sorted.
+        if (!swapped) break;// If no 2 elements were swapped in a pass, array is sorted.
     }
     return arr;
 } 
