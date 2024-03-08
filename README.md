@@ -2,3 +2,4 @@
 
 <a href="https://docs.google.com/document/d/1FKPwM7F1fqW_Emv_W1xlTbSix9ZqLBqZgbv0oOhG9Ds/edit?usp=sharing">Detailed notes of Singly Linkedlist </a>
 
+<a href="https://docs.google.com/document/d/1XeqXYTGOike7sMUp3gmZDXrMK43waR6y7W54atnTsus/edit?usp=sharing">DSA sheet 2 sorting </a>
