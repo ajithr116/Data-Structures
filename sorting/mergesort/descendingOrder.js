@@ -1,0 +1,24 @@
+function mergeSort(arr){
+    const half = arr.length/2;
+    if(arr.length<2){
+        return arr;
+    }
+    let left = arr.splice(0,half);
+    return merge(mergeSort(left),mergeSort(arr));
+}
+
+function merge(left,right){
+    let arr = [];
+    while(left.length && right.length){
+        if(left[0]>right[0]){
+            arr.push(left.shift());
+        }
+        else{
+            arr.push(right.shift());
+        }
+    }
+    return [...arr,...left,...right];
+}
+
+console.log(mergeSort([1,3,7,3,6,87,4,7,3]));
+
