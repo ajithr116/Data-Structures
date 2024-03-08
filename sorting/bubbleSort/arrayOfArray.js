@@ -2,8 +2,8 @@ function bubbleSort(arr){
     const len = arr.length;
     for(let i=0;i<len;i++){
         for(let j=0;j<len-i-1;j++){
-            if(arr[j]>arr[j+1]){
-                temp = arr[j];
+            if(arr[j][1]>arr[j+1][1]){
+                let temp = arr[j];
                 arr[j]=arr[j+1];
                 arr[j+1]=temp;
             }
@@ -13,4 +13,10 @@ function bubbleSort(arr){
 }
 
 
-console.log(bubbleSort([3,7,6,4,9,0,11,1,1]));
+let people = [
+    ['Alice', 20],
+    ['Bob', 30],
+    ['Charlie', 25],
+    ['Charlie', 1]
+];
+console.log(bubbleSort(people))
