@@ -13,7 +13,7 @@ function bubbleSort(arr) {
         if (!swapped) break;// If no two elements were swapped in a pass, array is sorted.
     }
     return arr;
-}
+} 
 
 let people = [
     { name: 'Alice', age: 20 },
