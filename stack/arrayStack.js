@@ -35,7 +35,7 @@ class Stack{
         return this.data.indexOf(data)+1;
     }
     reverse(){
-        
+        return this.data.split('').reverse()
     }
 }
 
