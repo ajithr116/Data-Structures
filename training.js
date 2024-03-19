@@ -1,201 +1,87 @@
-class Node {
-    constructor(data) {
-      this.data = data;
-      this.left = null;
-      this.right = null;
-    }
-}
-  
-class BinarySearchTree {
-    constructor() {
-      this.root = null;
-    }
-  
-    // Insertion
-    insert(data) {
-      this.root = this._insert(this.root, data);
-    }
-  
-    _insert(node, data) {
-      if (node === null) {
-        return new Node(data);
-      } else if (data < node.data) {
-        node.left = this._insert(node.left, data);
-      } else {
-        node.right = this._insert(node.right, data);
-      }
-      return node;
-    }
-  
-    // Contains
-    contains(data) {
-      return this._contains(this.root, data);
-    }
-  
-    _contains(node, data) {
-      if (node === null) {
-        return false;
-      } else if (data === node.data) {
-        return true;
-      } else if (data < node.data) {
-        return this._contains(node.left, data);
-      } else {
-        return this._contains(node.right, data);
-      }
-    }
-  
-    // Delete method starts the deletion process from the root
-    delete(data) {
-        this.root = this._delete(this.root, data);
+class MaxHeap {
+  constructor() {
+    this.arr = [];
+  }
+
+  heapify(arr, n, i) {
+    let largest = i;
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
+
+    // Check if the left child exists and if it's greater than the current largest element
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
     }
 
-    // Helper method to perform the actual deletion
-    _delete(node, data) {
-        // If the tree is empty (node is null), return null
-        if (node === null) {
-        return node;
-        }
-
-        // If data to be deleted is less than the node's data, then it lies in left subtree
-        else if (data < node.data) {
-        node.left = this._delete(node.left, data);
-        }
-
-        // If data to be deleted is greater than the node's data, then it lies in right subtree
-        else if (data > node.data) {
-        node.right = this._delete(node.right, data);
-        }
-
-        // If data is same as node's data, then this is the node to be deleted
-        else {
-        // Node with only one child or no child
-        if (node.left === null) {
-            return node.right;
-        } else if (node.right === null) {
-            return node.left;
-        }
-
-        // Node with two children: get the inorder successor (smallest in the right subtree)
-        let temp = this.min_value(node.right);
-
-        // Copy the inorder successor's data to this node
-        node.data = temp.data;
-
-        // Delete the inorder successor
-        node.right = this._delete(node.right, temp.data);
-        }
-        return node;
+    // Check if the right child exists and if it's greater than the current largest element
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
     }
 
-    // Helper method to find the node with the minimum value
-    min_value(node) {
-        let current = node;
+    // If the largest element is not the current node, swap them and continue heapifying
+    if (largest !== i) {
+        [arr[i], arr[largest]] = [arr[largest], arr[i]];
+        this.heapify(arr, n, largest);
+    }
+  }
 
-        // Loop down to find the leftmost leaf (smallest value)
-        while (current && current.left !== null) {
-        current = current.left;
-        }
-        return current;
+  insert(data) {
+    this.arr.push(data); // Insert the new element at the end of the array
+    let i = this.arr.length - 1; // Get the index of the newly inserted element
+
+    // Continue swapping with the parent until the heap property is satisfied
+    while (i > 0) {
+      let parent = Math.floor((i - 1) / 2); // Get the index of the parent node
+      if (this.arr[i] <= this.arr[parent]) { // If the parent is greater than or equal to the current node, break
+          break;
+      }
+
+      // Swap the current node with its parent
+      [this.arr[i], this.arr[parent]] = [this.arr[parent], this.arr[i]];
+      i = parent; // Update the index to the parent for the next iteration
     }
-  
-    // Traversals
-    preorder(node) {
-      if (node !== null) {
-        console.log(node.data);
-        this.preorder(node.left);
-        this.preorder(node.right);
-      }
+  }
+
+  remove() {
+    const n = this.arr.length;
+    if (n === 0) {
+      return null;
     }
-  
-    inorder(node) {
-      if (node !== null) {
-        this.inorder(node.left);
-        console.log(node.data);
-        this.inorder(node.right);
-      }
+    const max = this.arr[0];
+    this.arr[0] = this.arr[n - 1];
+    this.arr.pop();
+    this.heapify(this.arr, n - 1, 0);
+  }
+
+  get() {
+    return this.arr;
+  }
+
+  heapSort() {
+    const n = this.arr.length;
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      this.heapify(this.arr, n, i);
     }
-  
-    postorder(node) {
-      if (node !== null) {
-        this.postorder(node.left);
-        this.postorder(node.right);
-        console.log(node.data);
-      }
+    for (let i = n - 1; i > 0; i--) {
+      let temp = this.arr[0];
+      this.arr[0] = this.arr[i];
+      this.arr[i] = temp;
+      this.heapify(this.arr, i, 0);
     }
-  
-    // Find closest value
-    closestValue(data) {
-      let current = this.root;
-      let closest = null;
-  
-      while (current !== null) {
-        const distance = Math.abs(data - current.data);
-        if (closest === null || distance < Math.abs(data - closest.data)) {
-          closest = current;
-        }
-        current = data < current.data ? current.left : current.right;
-      }
-  
-      return closest ? closest.data : null;
-    }
-  
-    // Validate BST (basic implementation)
-    isValidBST(node, minVal = null, maxVal = null) {
-      if (node === null) {
-        return true;
-      }
-  
-      if (minVal !== null && node.data <= minVal) {
-        return false;
-      }
-  
-      if (maxVal !== null && node.data >= maxVal) {
-        return false;
-      }
-  
-      return this.isValidBST(node.left, minVal, node.data) && this.isValidBST(node.right, node.data, maxVal);
-    }
-  
+    return this.arr;
+  }
 }
 
-// Create a new Binary Search Tree
-const bst = new BinarySearchTree();
-
-// Insert some random values
-bst.insert(50);
-bst.insert(30);
-bst.insert(20);
-bst.insert(40);
-bst.insert(70);
-bst.insert(60); 
-bst.insert(80);
-
-// Check if the BST contains a value
-console.log(bst.contains(30)); // Should print: true
-console.log(bst.contains(90)); // Should print: false
-
-// Perform different types of traversals
-console.log("Inorder traversal:");
-bst.inorder(bst.root); // Should print: 20 30 40 50 60 70 80
-
-console.log("Preorder traversal:");
-bst.preorder(bst.root); // Should print: 50 30 20 40 70 60 80
-
-console.log("Postorder traversal:");
-bst.postorder(bst.root); // Should print: 20 40 30 60 80 70 50
-
-// Find the closest value to a given number
-console.log("closest value : "+bst.closestValue(780)); // Should print: 70
-
-// Validate if the tree is a BST
-console.log(bst.isValidBST(bst.root)); // Should print: true
-
-// Delete a value from the BST
-bst.delete(70);
-
-// Check if the deleted value still exists in the BST
-console.log(bst.contains(70)); // Should print: false
-
-// Find the minimum value in the BST
-console.log(bst.min_value(bst.root).data); // Should print: 20
+const heap = new MaxHeap();
+heap.insert(2);
+heap.insert(23);
+heap.insert(34);
+heap.insert(1);
+heap.insert(5);
+console.log(heap.get());
+console.log(heap.heapSort());
+console.log(heap.get());
+heap.insert(5);
+console.log(heap.get());
+console.log(heap.heapSort());
 
