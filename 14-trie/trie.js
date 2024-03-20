@@ -5,7 +5,7 @@ class Node{
     }
 }
 
-class trie{
+class Trie{
     constructor(){
         this.root = new Node();
     }
@@ -14,7 +14,7 @@ class trie{
         for(let i=0;i<word.length;i++){
             let ch = word[i];
             if(!node.children[ch]){
-                node.children[ch] = new node;
+                node.children[ch] = new Node();
             }
             node = node.children[ch];
         }
@@ -36,11 +36,11 @@ class trie{
     }
     _delete(node,word,index){
         if(index===word.length){
-            if(!index.endWord){
+            if(!node.endWord){
                 return false;
             }
             node.endWord = false;
-            return !Object.keys(keys.children).length===0;
+            return !Object.keys(node.children).length===0;
         }
         let ch = word[index];
         let chNode = node.children[ch];
@@ -59,3 +59,7 @@ const t = new Trie();
 t.insert("ajith")
 t.insert("rakoon");
 t.insert("wolf");
+console.log(t.search("ajith"));
+t.delete("ajith");
+console.log(t.search("ajith"));
+
