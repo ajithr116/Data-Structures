@@ -54,7 +54,11 @@ class graph{
         }
         return edge;
     }
-
+    display(){
+        for(let vertex in this.list){
+            console.log(vertex + "->" + this.list[vertex]);
+        }
+    }
 }
 
 const g = new graph();
